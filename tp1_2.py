@@ -1,5 +1,5 @@
 from io import StringIO
-
+import csv
 
 # This lab use the movielens dataset available here
 # https://grouplens.org/datasets/movielens/
@@ -7,28 +7,31 @@ from io import StringIO
 
 # 1. create a method load_movies which load the csv file an return a dict
 # For instance, the entry: "17, name of the movie (1993), genre1|genre2|genre3"
-# is an entry of the dict variable movies is: 
+# is an entry of the dict variable movies is:
 
 movies_entry_example = "17, name of the movie (1993), genre1|genre2|genre3"
 
 movies_example = {
 	17: {
-		"name": "name of the movie", 
-		"genres": ("genre1", "genre2", "genre3"),
+		"name": "name of the movie",
+		"genres": ["genre1", "genre2", "genre3"],
 		"year": 1993
 	}
 }
 
-MOVIES_CSV_FILE = "movies.csv"
-
 #568,Bhaji on the Beach (1993),Comedy|Drama
 def load_movies(csv_file):
-	
-
-
-
-movies = load_movies(MOVIES_CSV_FILE) 
-
+    dict = {}
+    csv_reader = csv.reader(csv_file, delimiter=',',skipinitialspace=True)
+    #next(csv_reader)
+    for row in csv_reader:
+        i = row[0]
+        name, year = row[1].split('(')
+        name = name[0:-1] #remove space at the end
+        year = year[0:-1] #remove ')' at the end
+        genres = row[2].split('|')
+        dict[int(i)] = {"name": name, "genres":genres, "year":int(year)}
+    return dict
 
 assert load_movies(StringIO(movies_entry_example)) == movies_example
 
@@ -41,7 +44,7 @@ assert load_movies(StringIO(movies_entry_example)) == movies_example
 
 
 
-# 2. Create two methods which returns the number of each genre in an array called 
+# 2. Create two methods which returns the number of each genre in an array called
 #    genres like this:
 
 genres_example = [
