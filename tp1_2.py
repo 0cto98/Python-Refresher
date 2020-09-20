@@ -1,5 +1,6 @@
 from io import StringIO
 import csv
+from operator import itemgetter #to sort list of tuples
 
 # This lab use the movielens dataset available here
 # https://grouplens.org/datasets/movielens/
@@ -35,31 +36,35 @@ def load_movies(csv_file):
 
 assert load_movies(StringIO(movies_entry_example)) == movies_example
 
-# Warning: there is a few thing to keep in mind:
-# - name can contains comma
-# - if a name contains comma then there is double-quote around
-# - year is extracted from the name but
-#   * not all names have a year
-#   * some are badly formatted
-
-
 
 # 2. Create two methods which returns the number of each genre in an array called
 #    genres like this:
 
 genres_example = [
-  ('Adventure', 2134),
-  ('Animation', 345),
-  # ...
+  ('genre1', 1),
+  ('genre2', 1),
+  ('genre3', 1)
 ]
 
 # 2.1 using normal loop methods
-
 def count_genres_with_loop(movies):
-	pass
+    dict = {}
+    for movie in movies:
+        for genre in movies[movie]["genres"]:
+            if genre in dict:
+                dict[genre] += 1    #if genre already exists, we add 1
+            else:
+                dict[genre] = 1     #otherwise we create it and initialize it to 1
+    #Then we "translate" dict to an array to fit what is asked
+    genres_array = []
+    for genre in dict:
+        genres_array.append((genre,dict[genre]))
+    genres_array.sort(key=itemgetter(0))
+    return genres_array
+
+assert count_genres_with_loop(load_movies(StringIO(movies_entry_example))) == genres_example
 
 # 2.2 using normal list comprehension
-
 def count_genres_with_list_comprehension(movies):
 	pass
 
