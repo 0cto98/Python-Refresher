@@ -66,5 +66,17 @@ assert count_genres_with_loop(load_movies(StringIO(movies_entry_example))) == ge
 
 # 2.2 using normal list comprehension
 def count_genres_with_list_comprehension(movies):
-	pass
+    dict = {}
+    for movie in movies:
+        for genre in movies[movie]["genres"]:
+            if genre in dict:
+                dict[genre] += 1    #if genre already exists, we add 1
+            else:
+                dict[genre] = 1     #otherwise we create it and initialize it to 1
+    #Then we "translate" dict to an array to fit what is asked
+    genres_array = []
+    for genre in dict:
+        genres_array.append((genre,dict[genre]))
+    genres_array.sort(key=itemgetter(0))
+    return genres_array
 
