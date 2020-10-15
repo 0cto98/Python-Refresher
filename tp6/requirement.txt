@@ -1,0 +1,7 @@
+urllib3
+regex
+beautifulsoup4
+datetime
+os
+r-sys
+nb_conda

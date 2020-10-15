@@ -1,0 +1,6 @@
+numpy
+matplotlib
+seaborn
+dask
+multiprocess
+nb_conda
