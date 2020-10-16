@@ -62,7 +62,8 @@ The installation of a C compiler basically follows the indications given [here](
 
 Caveat: do not use the MinGw64 compiler (strongly discouraged in this specific case, see [this post](https://github.com/cython/cython/wiki/CythonExtensionsOnWindows)).
 
-Remark: another excellent option consists in activating the *Windows Sub-system for Linux (WSL)* (detailed steps available [here](https://docs.microsoft.com/fr-fr/windows/wsl/install-win10)). You can then simply open a Linux command prompt from Windows, and follow the step by step guide for Linux).
+Remark: another excellent option consists in activating the *Windows Sub-system for Linux (WSL)* (detailed steps available [here](https://docs.microsoft.com/fr-fr/windows/wsl/install-win10)).
+You can then simply open a Linux command prompt from Windows, and follow the step by step guide for Linux).
  
 ----
 
